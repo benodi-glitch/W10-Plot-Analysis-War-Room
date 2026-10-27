@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>War Room Worksheet — English through Films</title>
+<style>
+  :root { --navy:#292C74; --navy-dark:#1d1f54; --gold:#EABD2C; --bg:#f5f5f8; --card:#fff; --border:#dcdce3; --text:#1a1a1a; --muted:#5f6370; --accent-bg:#f0effa; --warn:#b8860b; --danger:#c62828; }
+  * { box-sizing:border-box; }
+  [hidden]{ display:none !important; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+  body.on, body.on * { -webkit-user-select:none; user-select:none; -webkit-touch-callout:none; -webkit-user-drag:none; }
+  input[type=text], textarea { -webkit-user-select:text; user-select:text; }
+  .topbar { position:sticky; top:0; z-index:50; background:var(--navy); color:#fff; border-bottom:3px solid var(--gold); padding:10px 16px; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .topbar b { font-size:14px; } .topbar small { opacity:.8; font-size:12px; }
+  .wrap { max-width:860px; margin:0 auto; padding:22px 16px 140px; }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:18px 20px; margin-bottom:16px; }
+  h1 { margin:0 0 4px; color:var(--navy); font-size:clamp(22px,4vw,28px); }
+  .sub { margin:0 0 14px; color:var(--muted); font-size:14px; }
+  h2.sec { margin:26px 0 4px; font-size:19px; color:var(--navy); border-bottom:3px solid var(--gold); padding-bottom:6px; }
+  p.dir { margin:6px 0 12px; font-size:13.5px; color:var(--muted); }
+  ul.rules { margin:0 0 12px; padding-left:20px; font-size:14px; } ul.rules li{ margin-bottom:5px; }
+  .fields { display:grid; grid-template-columns:1fr 1fr; gap:12px 14px; margin:12px 0; }
+  @media(max-width:560px){ .fields{ grid-template-columns:1fr; } }
+  label.l { font-size:12px; color:var(--muted); display:block; margin-bottom:4px; }
+  input[type=text], textarea, select { width:100%; padding:9px 11px; border:1px solid var(--border); border-radius:8px; font:inherit; font-size:14.5px; background:#fff; color:var(--text); }
+  textarea { min-height:92px; resize:vertical; line-height:1.45; }
+  textarea.sm { min-height:64px; }
+  .q { margin-bottom:16px; } .q .t { font-weight:600; font-size:14.5px; margin-bottom:6px; overflow-wrap:anywhere; } .q .t span{ color:#b08a00; margin-right:4px; }
+  .wc { font-size:11.5px; color:var(--muted); text-align:right; }
+  .cc { border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:12px; background:#fcfcff; }
+  .cc h4 { margin:0 0 8px; font-size:13px; color:var(--navy); }
+  .seq { display:grid; grid-template-columns:78px 1fr; gap:8px 12px; align-items:center; margin-bottom:8px; font-size:14.5px; }
+  .ex { border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:12px; }
+  .ex .e { font-weight:700; color:var(--navy); margin-bottom:6px; overflow-wrap:anywhere; } .ex .e span{ color:#b08a00; margin-right:6px; }
+  .types { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+  .types label { display:flex; gap:6px; align-items:center; padding:6px 10px; border:1px solid var(--border); border-radius:8px; font-size:13.5px; cursor:pointer; }
+  .types label.sel { background:var(--accent-bg); border-color:var(--navy); font-weight:700; }
+  .types input { accent-color:var(--navy); }
+  ol.steps { padding-left:0; list-style:none; margin:0; } ol.steps li{ display:flex; gap:12px; margin-bottom:8px; font-size:14.5px; }
+  ol.steps b { background:var(--navy); color:#fff; width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-size:13px; }
+  button { font:inherit; font-weight:600; font-size:14px; border-radius:9px; padding:11px 20px; cursor:pointer; border:none; }
+  .btn-primary{ background:var(--navy); color:#fff; } .btn-gold{ background:var(--gold); color:#1a1a1a; } .btn-ghost{ background:#fff; border:1px solid var(--border); }
+  button:disabled{ opacity:.5; cursor:not-allowed; }
+  .err{ color:var(--danger); font-size:13px; min-height:18px; margin-bottom:8px; }
+  .consent{ font-size:13.5px; display:flex; gap:8px; align-items:flex-start; margin:10px 0 14px; }
+  .toolbar { position:fixed; left:0; right:0; bottom:0; z-index:40; background:rgba(255,255,255,.97); border-top:1px solid var(--border); padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px)); }
+  .toolbar .in{ max-width:860px; margin:0 auto; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .toolbar .prog{ font-size:13px; color:var(--muted); margin-right:auto; } .toolbar .tip{ width:100%; font-size:11.5px; color:var(--muted); }
+  .banner { background:#fff4e5; border:1px solid #f0c27b; border-left:5px solid var(--warn); padding:12px 16px; border-radius:8px; margin-bottom:14px; font-size:14px; color:#5a3d00; }
+  .banner.danger{ background:#fdecea; border-color:#f1a9a0; border-left-color:var(--danger); color:#7a1c14; }
+  .toast{ position:fixed; left:50%; bottom:96px; transform:translateX(-50%); background:#222; color:#fff; padding:10px 16px; border-radius:8px; font-size:13px; z-index:80; opacity:0; pointer-events:none; transition:opacity .2s; max-width:90vw; text-align:center; }
+  .toast.show{ opacity:1; }
+  .modal{ position:fixed; inset:0; z-index:100; background:rgba(0,0,0,.65); display:flex; align-items:center; justify-content:center; padding:20px; }
+  .modal .box{ background:#fff; border-radius:14px; max-width:460px; width:100%; padding:24px; border-top:6px solid var(--danger); text-align:center; }
+  .modal h3{ margin:0 0 8px; color:var(--danger); font-size:22px; } .modal p{ margin:0 0 18px; font-size:15px; }
+  body.locked textarea, body.locked input[type=text], body.locked select { background:#f1f1f4; pointer-events:none; }
+  body.locked .types label { pointer-events:none; }
+  .reset { font-size:11px; color:#9a9aa5; margin-top:16px; text-align:center; } .reset a{ color:#9a9aa5; }
+  .pa, .print-only { display:none; }
+
+  @page { size:A4 portrait; margin:16mm 14mm; }
+  @media print {
+    * { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+    html, body { width:auto !important; height:auto !important; overflow:visible !important; background:#fff !important; color:#000; }
+    body { font-size:10.5pt; }
+    .topbar, .toolbar, .toast, .banner, .start, .no-print, textarea, select, input[type=text].f, .wc, .modal, .reset { display:none !important; }
+    .print-only { display:block !important; }
+    .wrap { max-width:none !important; width:100% !important; margin:0 !important; padding:0 !important; }
+    #ws { display:block !important; }
+    .card { border:none; padding:0; margin:0; }
+    .ph { border-bottom:3px solid #EABD2C; padding-bottom:6px; margin-bottom:10px; }
+    .ph h1 { font-size:16pt; margin:0 0 2px; } .ph p{ margin:0 0 6px; font-size:10pt; color:#444; }
+    .ph table { width:100%; border-collapse:collapse; table-layout:fixed; font-size:10pt; }
+    .ph td { border:1px solid #bbb; padding:4px 8px; overflow-wrap:anywhere; } .ph td b{ color:#292C74; }
+    h2.sec { font-size:13pt; margin:14px 0 4px; break-after:avoid; page-break-after:avoid; }
+    p.dir { font-size:9.5pt; margin:2px 0 8px; }
+    .q, .cc, .ex, .seq { break-inside:avoid; page-break-inside:avoid; }
+    .q { margin-bottom:9px; } .q .t { font-size:10.5pt; margin-bottom:3px; }
+    .pa { display:block !important; border:1px solid #bbb; border-radius:4px; padding:5px 8px; min-height:34px; white-space:pre-wrap; overflow-wrap:anywhere; word-break:break-word; font-size:10.5pt; width:100%; }
+    .pa.one { min-height:22px; }
+    .cc { border:1px solid #bbb; padding:6px 8px; margin-bottom:8px; background:#fff; } .cc h4{ font-size:10.5pt; margin:0 0 4px; }
+    .cc .row { display:grid; grid-template-columns:1fr 1fr; gap:4px 8px; } .cc .row .q { margin:0; }
+    .seq { grid-template-columns:70px 1fr; gap:4px 10px; margin-bottom:4px; font-size:10.5pt; }
+    .ex { border:1px solid #bbb; padding:6px 8px; margin-bottom:8px; }
+    .types { gap:4px; } .types label { padding:2px 7px; font-size:9.5pt; border-color:#ddd; } .types input { display:none; }
+    .types label.sel { background:#e8e8f7 !important; border:1.5px solid #292C74; font-weight:700; }
+    ol.steps li { font-size:10pt; margin-bottom:4px; break-inside:avoid; }
+    ol.steps b { width:20px; height:20px; font-size:9pt; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar no-print" id="topbar" hidden><div><b>War Room Worksheet · English through Films</b><br><small id="who"></small></div><small id="saved">Draft saved on this device</small></div>
+
+<div class="wrap">
+  <section class="card start" id="startScreen">
+    <h1>War Room: Week 9 Worksheet</h1>
+    <p class="sub">Plot and Storyline Analysis · English through Films · Unit 2 — <em>War Room</em></p>
+    <ul class="rules">
+      <li>This worksheet has five parts: Plot Recall, Character Analysis, Plot Sequence, Expression Work and a Mini Vocabulary Journal. Part 4 (Pair Oral Spot-Check) is done aloud with your partner.</li>
+      <li>Answer in your own words. Use specific events, actions or dialogue from the film as evidence.</li>
+      <li>Your work is saved automatically on this device. Refreshing the page does not erase it.</li>
+      <li>Copy, cut, paste, text selection, right-click and drag-and-drop are disabled.</li>
+      <li>When you finish, press <b>Save as PDF</b> and save the file. Then upload the PDF where your lecturer tells you.</li>
+      <li>Work on your own words. Do not use AI tools, translation tools or other people’s answers (except in the pair speaking activity).</li>
+    </ul>
+    <div class="fields">
+      <div><label class="l" for="inName">Full name</label><input type="text" id="inName" autocomplete="off" placeholder="Your full name"></div>
+      <div><label class="l" for="inNim">NIM</label><input type="text" id="inNim" autocomplete="off" placeholder="Student ID"></div>
+    </div>
+    <label class="consent"><input type="checkbox" id="inOk"><span>I have read the rules above.</span></label>
+    <div class="err" id="startErr"></div>
+    <button class="btn-primary" id="startBtn" type="button">Start Worksheet</button>
+  </section>
+
+  <main id="ws" hidden>
+    <div class="print-only ph" id="printHead">
+      <h1>WAR ROOM: WEEK 9 WORKSHEET</h1>
+      <p>Jakarta International University · English through Films · Plot and Storyline Analysis</p>
+      <table>
+        <tr><td><b>Name:</b> <span id="phName"></span></td><td><b>NIM:</b> <span id="phNim"></span></td></tr>
+        <tr><td><b>Partner:</b> <span id="phPartner"></span></td><td><b>Date saved:</b> <span id="phDate"></span></td></tr>
+        <tr><td colspan="2"><b>Course:</b> English through Films · War Room</td></tr>
+      </table>
+    </div>
+
+    <div class="card no-print"><div class="fields" style="margin:0"><div><label class="l" for="partner">Partner’s name (for the pair speaking activity)</label><input type="text" class="f" id="partner" data-id="partner" autocomplete="off"></div></div></div>
+    <div id="body"></div>
+  </main>
+</div>
+
+<div class="toolbar no-print" id="toolbar" hidden><div class="in">
+  <span class="prog" id="prog"></span>
+  <button class="btn-ghost" id="pdfBtn" type="button">Save as PDF</button>
+  <div class="tip">Save as PDF: in the print window choose Destination → “Save as PDF”, paper A4, and turn “Headers and footers” off.</div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "warroom_week9_plot_v1";
+
+  var PLOT = [
+    "What situation are Tony and Elizabeth Jordan in at the beginning of the film, and how does their marriage look at the start?",
+    "How does Elizabeth meet Ms. Clara, and what does Ms. Clara challenge her to do?",
+    "Identify one important conversation or confrontation. What does it reveal about the characters or their situation?",
+    "What event makes Tony reconsider how he lives and what he wants? Explain briefly.",
+    "In your own words, describe the ending of the film and the main outcome for Tony and Elizabeth."
+  ];
+  var CHARS = ["Tony Jordan","Elizabeth Jordan","Ms. Clara","Danielle","Coleman","Mike"];
+  var EVENTS = [
+    "Tony is fired from his job.",
+    "Ms. Clara shows Elizabeth her “war room” prayer closet.",
+    "Tony confesses to his bosses and returns the stolen samples.",
+    "Tony is praised by his bosses for winning the Holcombe account.",
+    "Danielle’s team competes in the Double Dutch championship.",
+    "A young man threatens Ms. Clara with a knife while she is getting ice cream with Elizabeth and Danielle.",
+    "Elizabeth forgives Tony after he apologizes."
+  ];
+  var EXPR = [
+    ["Can we talk?", ["A. Daily spoken expression","B. Idiom","C. Phrasal verb","D. Spoken grammar / pattern"]],
+    ["Let me get this straight.", ["A. Daily spoken expression","B. Idiom / conversational expression","C. Phrasal verb","D. Collocation"]],
+    ["I expected you to hit the ceiling.", ["A. Daily expression","B. Idiom","C. Phrasal verb","D. Functional English"]],
+    ["Just roll with it.", ["A. Daily spoken expression","B. Idiom","C. Phrasal verb","D. Spoken grammar / pattern"]],
+    ["I got this.", ["A. Daily expression","B. Idiom","C. Spoken grammar / structure","D. Phrasal verb"]]
+  ];
+  var ORAL = [
+    "Choose one plot or character answer you wrote.",
+    "Explain it to your partner in your own words and mention one specific event, action or dialogue as support.",
+    "Your partner asks ONE follow-up question: “Why?” / “What happened next?” / “What does this show about the character?”",
+    "Switch roles. Be ready to explain your answer clearly in about 30–45 seconds."
+  ];
+
+  var state = { name:"", nim:"", start:0, f:{} };
+  var toastT=null, saveT=null;
+  var IDS = [];
+  function $(id){ return document.getElementById(id); }
+  function load(){ try{ var r=localStorage.getItem(KEY); if(r){ var o=JSON.parse(r); if(o&&typeof o==="object") state=Object.assign(state,o); } }catch(e){} }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+  function toast(m){ var t=$("toast"); t.textContent=m; t.classList.add("show"); if(toastT)clearTimeout(toastT); toastT=setTimeout(function(){t.classList.remove("show");},2400); }
+  function el(tag,cls,txt){ var e=document.createElement(tag); if(cls)e.className=cls; if(txt!==undefined)e.textContent=txt; return e; }
+
+  function mkText(id, cls, ph){
+    var wrap=el("div"); var ta=el("textarea", "f "+(cls||"")); ta.setAttribute("data-id",id); ta.setAttribute("autocomplete","off"); ta.setAttribute("spellcheck","false"); if(ph)ta.placeholder=ph;
+    var pa=el("div","pa"); pa.setAttribute("data-mirror",id);
+    wrap.appendChild(ta); wrap.appendChild(pa); IDS.push(id); return wrap;
+  }
+  function mkLine(id, ph){
+    var wrap=el("div"); var i=el("input","f"); i.type="text"; i.setAttribute("data-id",id); i.setAttribute("autocomplete","off"); if(ph)i.placeholder=ph;
+    var pa=el("div","pa one"); pa.setAttribute("data-mirror",id); wrap.appendChild(i); wrap.appendChild(pa); IDS.push(id); return wrap;
+  }
+  function sec(title, dir){ var b=$("body"); b.appendChild(el("h2","sec",title)); if(dir) b.appendChild(el("p","dir",dir)); return b; }
+
+  function build(){
+    var b=$("body"); b.innerHTML=""; IDS=[];
+    sec("1. Plot Recall","Answer in 1–3 sentences each. Focus on what happened, why it mattered, and what changed.");
+    PLOT.forEach(function(q,i){ var d=el("div","q card"); var t=el("div","t"); var n=el("span","",(i+1)+"."); t.appendChild(n); t.appendChild(document.createTextNode(q)); d.appendChild(t); d.appendChild(mkText("p"+i)); d.appendChild(el("div","wc no-print")).setAttribute("data-wc","p"+i); b.appendChild(d); });
+
+    sec("2. Character Analysis","Choose TWO characters. Use actions and dialogue as evidence.");
+    [1,2].forEach(function(n){
+      var c=el("div","cc"); c.appendChild(el("h4","","Character "+n));
+      var sel=el("select","f"); sel.setAttribute("data-id","cname"+n); var o0=el("option","","Choose a character…"); o0.value=""; sel.appendChild(o0);
+      CHARS.forEach(function(x){ var o=el("option","",x); o.value=x; sel.appendChild(o); }); IDS.push("cname"+n);
+      var pm=el("div","pa one"); pm.setAttribute("data-mirror","cname"+n);
+      c.appendChild(sel); c.appendChild(pm);
+      [["role","Role in the story"],["mot","Motivation — what does the character want?"],["act","Important action — what does the character do?"]].forEach(function(r){
+        var q=el("div","q"); q.style.marginTop="10px"; q.appendChild(el("div","t",r[1])); q.appendChild(mkText("c"+n+r[0],"sm")); c.appendChild(q);
+      });
+      b.appendChild(c);
+    });
+    var q3=el("div","q card"); var t3=el("div","t"); t3.appendChild(el("span","","3.")); t3.appendChild(document.createTextNode("Character connection: How does one character influence another character’s decisions or behavior?")); q3.appendChild(t3); q3.appendChild(mkText("conn")); q3.appendChild(el("div","wc no-print")).setAttribute("data-wc","conn"); b.appendChild(q3);
+
+    sec("3. Plot Sequence","Put the events in the order they happen in the film. Write 1 for the first event and 7 for the last. Use each number once.");
+    var cs=el("div","card");
+    EVENTS.forEach(function(ev,i){
+      var r=el("div","seq"); var s=el("select","f"); s.setAttribute("data-id","seq"+i); var o0=el("option","","—"); o0.value=""; s.appendChild(o0);
+      for(var k=1;k<=EVENTS.length;k++){ var o=el("option","",String(k)); o.value=String(k); s.appendChild(o); }
+      IDS.push("seq"+i);
+      var left=el("div"); left.appendChild(s); var pm=el("div","pa one"); pm.setAttribute("data-mirror","seq"+i); left.appendChild(pm);
+      r.appendChild(left); r.appendChild(el("div","",ev)); cs.appendChild(r);
+    });
+    b.appendChild(cs);
+    var q4=el("div","q card"); q4.appendChild(el("div","t","Which event in your sequence is the turning point of the story? Explain why in 1–2 sentences.")); q4.appendChild(mkText("turn","sm")); b.appendChild(q4);
+
+    sec("4. Expression Work — Scenes from War Room","Explain what each expression means in this context, then choose ONE type.");
+    EXPR.forEach(function(x,i){
+      var e=el("div","ex"); var h=el("div","e"); h.appendChild(el("span","",String(i+1))); h.appendChild(document.createTextNode("“"+x[0]+"”")); e.appendChild(h);
+      e.appendChild(el("div","l","Meaning in this context")).className="l"; e.appendChild(mkLine("m"+i,"Write the meaning in your own words"));
+      var ty=el("div","types"); IDS.push("t"+i);
+      x[1].forEach(function(lbl,k){ var lab=el("label"); var r=el("input"); r.type="radio"; r.name="t"+i; r.value=String(k); r.setAttribute("data-radio","t"+i); lab.appendChild(r); lab.appendChild(document.createTextNode(lbl)); ty.appendChild(lab); });
+      e.appendChild(ty); b.appendChild(e);
+    });
+
+    sec("5. Pair Oral Spot-Check","Work with your partner. Each student explains ONE answer from Parts 1–2 without simply reading it aloud. (Done aloud — no writing.)");
+    var ol=el("ol","steps card"); ORAL.forEach(function(s,i){ var li=el("li"); li.appendChild(el("b","","ABCD".charAt(i))); li.appendChild(el("div","",s)); ol.appendChild(li); }); b.appendChild(ol);
+
+    sec("6. Mini Vocabulary Journal","Choose ONE expression from Part 4 that you would genuinely find useful in everyday English.");
+    var vj=el("div","card");
+    [["vexp","Expression",1],["vmean","Meaning",1],["vsent","My own sentence",0],["vwhy","Why I chose it",0]].forEach(function(r){
+      var q=el("div","q"); q.appendChild(el("div","t",r[1])); q.appendChild(r[2]?mkLine(r[0]):mkText(r[0],"sm")); vj.appendChild(q);
+    }); b.appendChild(vj);
+    b.appendChild(el("p","dir","Keep your answers specific. The goal is to show that you can recall the film and explain what the characters do and why."));
+    IDS.push("partner");
+    bind();
+  }
+
+  function words(s){ s=(s||"").trim(); return s?s.split(/\s+/).length:0; }
+  function setVal(id,v){
+    var e=document.querySelector('[data-id="'+id+'"]'); if(e) e.value=v||"";
+    var rs=document.querySelectorAll('[data-radio="'+id+'"]'); for(var i=0;i<rs.length;i++){ rs[i].checked=(String(v)===rs[i].value); rs[i].parentNode.classList.toggle("sel",rs[i].checked); }
+  }
+  function mirrorAll(){
+    var ms=document.querySelectorAll("[data-mirror]");
+    for(var i=0;i<ms.length;i++){ var id=ms[i].getAttribute("data-mirror"); ms[i].textContent=(state.f[id]||"")||" "; }
+    var wc=document.querySelectorAll("[data-wc]"); for(var j=0;j<wc.length;j++){ var k=wc[j].getAttribute("data-wc"); wc[j].textContent=words(state.f[k])+" words"; }
+    var done=0,total=0; IDS.forEach(function(id){ if(id==="partner")return; total++; if((state.f[id]||"").toString().trim()) done++; });
+    $("prog").textContent=done+" / "+total+" fields completed";
+  }
+  function onChange(id,v){
+    state.f[id]=v;
+    mirrorAll();
+    if(saveT) clearTimeout(saveT); saveT=setTimeout(function(){ save(); $("saved").textContent="Draft saved on this device"; },250);
+  }
+  function bind(){
+    var fs=document.querySelectorAll("[data-id]");
+    for(var i=0;i<fs.length;i++){ (function(e){ var id=e.getAttribute("data-id"); var ev=(e.tagName==="SELECT")?"change":"input"; e.addEventListener(ev,function(){ onChange(id,e.value); }); })(fs[i]); }
+    var rs=document.querySelectorAll("[data-radio]");
+    for(var j=0;j<rs.length;j++){ (function(r){ r.addEventListener("change",function(){ var id=r.getAttribute("data-radio"); onChange(id,r.value); var sib=document.querySelectorAll('[data-radio="'+id+'"]'); for(var k=0;k<sib.length;k++) sib[k].parentNode.classList.toggle("sel",sib[k].checked); }); })(rs[j]); }
+  }
+  function restore(){ IDS.forEach(function(id){ if(state.f[id]!==undefined) setVal(id,state.f[id]); }); mirrorAll(); }
+
+  function showWs(){
+    $("startScreen").hidden=true; $("ws").hidden=false; $("topbar").hidden=false; $("toolbar").hidden=false;
+    document.body.classList.add("on");
+    $("who").textContent=state.name+" · "+state.nim;
+    build(); restore();
+  }
+
+  function dt(ms){ try{ return new Date(ms).toLocaleString(); }catch(e){ return ""; } }
+  function syncPrint(){
+    $("phName").textContent=state.name; $("phNim").textContent=state.nim; $("phPartner").textContent=state.f.partner||"—";
+    $("phDate").textContent=dt(Date.now());
+    mirrorAll();
+  }
+  function doPrint(){ syncPrint(); setTimeout(function(){ window.print(); },60); }
+  window.addEventListener("beforeprint",syncPrint);
+
+  function isField(t){ var e=t&&t.nodeType===1?t:(t&&t.parentElement); return !!(e&&e.closest&&e.closest("input[type='text'],textarea")); }
+  ["copy","cut","paste"].forEach(function(ev){ document.addEventListener(ev,function(e){ e.preventDefault(); toast("Copy / cut / paste is disabled."); }); });
+  ["dragstart","drag","dragenter","dragover","drop"].forEach(function(ev){ document.addEventListener(ev,function(e){ e.preventDefault(); if(ev==="drop") toast("Drag-and-drop is disabled."); }); });
+  document.addEventListener("contextmenu",function(e){ e.preventDefault(); toast("Right-click is disabled."); });
+  document.addEventListener("selectstart",function(e){ if(!isField(e.target)) e.preventDefault(); });
+  document.addEventListener("keydown",function(e){ if((e.ctrlKey||e.metaKey)&&!e.altKey){ var k=(e.key||"").toLowerCase(); if(k==="c"||k==="x"||k==="v"||k==="a"){ e.preventDefault(); toast("Keyboard copy / paste / select-all is disabled."); } } });
+
+
+  $("startBtn").addEventListener("click",function(){
+    var name=$("inName").value.trim(), nim=$("inNim").value.trim();
+    if(name.length<2||nim.length<3){ $("startErr").textContent="Please enter your full name and NIM."; return; }
+    if(!$("inOk").checked){ $("startErr").textContent="Please tick the box to confirm you have read the rules."; return; }
+    state={ name:name, nim:nim, start:Date.now(), f:{} };
+    save(); showWs(); window.scrollTo(0,0);
+  });
+  $("pdfBtn").addEventListener("click",doPrint);
+  load();
+  if(state.start) showWs();
+})();
+</script>
+</body>
+</html>
